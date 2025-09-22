@@ -33,7 +33,7 @@ buttons.forEach(button => {
 });
 
 function isNumber(val) {
-    return !isNaN(val);
+    return !isNaN(val) && val !== null && val !== undefined && val !== '';
 }
 
 function isOperator(val) {
