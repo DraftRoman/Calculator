@@ -1,2 +1,5 @@
 # Calculator
-The  Calculation Machine
+
+The Calculation Machine
+The structure
+https://miro.com/welcomeonboard/QW5vcFZPaS9TY3pEbnIyYWhIZldsWkVKVExMOEdDMUQ4TTMzSEE1RjVNaFVVb3NrNTAyclFrN0k4QitlMm10NFRwOEZVOUt6THFjTkRUNndMQzQxL0JlNE0rajFWcTNQWlJIVUJ2NzlOeEM1bkdrOU9DWVRhK2tGMHZxc1pqLzl3VHhHVHd5UWtSM1BidUtUYmxycDRnPT0hdjE=?share_link_id=398063799648
