@@ -92,3 +92,28 @@ p {
     color: var(--text);
     text-align: center;
 }
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 90%;
+    }
+    .calculator {
+        width: 90vw;
+        padding: 1.5rem;
+    }
+    .btn {
+        height: 5.5rem;
+        font-size: 2.2rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+
+}
