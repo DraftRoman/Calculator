@@ -71,6 +71,31 @@ function handleOperator(nextOperator) {
         firstValue = value;
     } else if (operator) {
         const result = calculate(firstValue, operator, value);
+        
+        if (result === CALCULATOR_STATE.ERROR_MESSAGE) {
+            currentValue = result;
+            resetCalculator();
+            return;
+        }
+        
+        currentValue = formatNumber(result);
+        firstValue = result;
+    }
+
+    waitingForSecondValue = true;
+    operator = nextOperator;
+}
+    const value = parseFloat(currentValue);
+
+    if (operator && waitingForSecondValue) {
+        operator = nextOperator;
+        return;
+    }
+
+    if (firstValue === null) {
+        firstValue = value;
+    } else if (operator) {
+        const result = calculate(firstValue, operator, value);
         currentValue = String(result);
         firstValue = result;
     }
