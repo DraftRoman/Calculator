@@ -68,6 +68,7 @@ h1 {
     background-color: var(--primary-light);
     color: var(--primary-dark);
 }
+
 .number:active {
     color: var(--primary-light);
     background-color: var(--text);
