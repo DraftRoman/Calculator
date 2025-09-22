@@ -1,8 +1,10 @@
 const display = document.getElementById("display-value");
 const buttons = document.querySelectorAll(".btn");
 
-let currentValue = "0";
-let firstValue = null;
+const CALCULATOR_STATE = {
+    INITIAL_VALUE: "0",
+    ERROR_MESSAGE: "Error"
+};
 let operator = null;
 let waitingForSecondValue = false;
 
