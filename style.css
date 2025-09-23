@@ -5,6 +5,16 @@
     --display-valor: #645757;
     --border-color: #00CDAC;
     --border-shadow: 0 4px 15px rgba(136, 211, 232, 0.332);
+    --button-height: 6rem;
+    --button-height-mobile: 5.5rem;
+    --button-radius: 1.6rem;
+    --font-size-hero: 6rem;
+    --font-size-hero-tablet: 3.5rem;
+    --font-size-display: 4.8rem;
+    --font-size-button: 2.4rem;
+    --font-size-button-mobile: 2.2rem;
+    --font-size-footer: 3rem;
+    --font-size-footer-mobile: 2rem;
 }
 html {
     font-size: 100%;
@@ -22,7 +32,7 @@ body {
     font-style: normal;
 }
 h1 {
-    font-size: 6rem;
+    font-size: var(--font-size-hero);
     color: var(--display-valor);
 }
 
@@ -37,7 +47,7 @@ h1 {
     
 }
 .display-value {
-    font-size: 4.8rem;
+    font-size: var(--font-size-display);
     text-align: right;
     margin-bottom: 2rem;
     padding: 1rem;
@@ -53,10 +63,10 @@ h1 {
     
 }
 .btn {
-    height: 6rem;
+    height: var(--button-height);
     border:solid;
-    border-radius: 1.6rem;
-    font-size: 2.4rem;
+    border-radius: var(--button-radius);
+    font-size: var(--font-size-button);
     cursor: pointer;
     transition: background-color 0.2s;
 }
@@ -89,13 +99,13 @@ h1 {
 }
 
 p {
-    font-size: 3rem;
+    font-size: var(--font-size-footer);
     color: var(--text);
     text-align: center;
 }
 @media (max-width: 1200px) {
     h1 {
-        font-size: 3.5rem;
+        font-size: var(--font-size-hero-tablet);
         margin-bottom: 2rem;
     }
     
@@ -110,11 +120,11 @@ p {
         padding: 1.5rem;
     }
     .btn {
-        height: 5.5rem;
-        font-size: 2.2rem;
+        height: var(--button-height-mobile);
+        font-size: var(--font-size-button-mobile);
     }
     p {
-        font-size: 2rem;
+        font-size: var(--font-size-footer-mobile)
     }
 
 }
