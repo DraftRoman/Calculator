@@ -9,7 +9,7 @@ let operator = null;
 let waitingForSecondValue = false;
 let currentValue = CALCULATOR_STATE.INITIAL_VALUE;
 let firstValue = null;
-
+let isResult = false;
 function updateDisplay() {
     display.textContent = currentValue;
 }
@@ -56,6 +56,9 @@ function handleButtonClick(value) {
 
 
 function isNumber(val) {
+    if (isResult) {
+        resetCalculator();
+    }
     return !isNaN(val) && val !== null && val !== undefined && val !== '';
 }
 
@@ -87,12 +90,13 @@ function handleOperator(nextOperator) {
 
     if (operator && waitingForSecondValue) {
         operator = nextOperator;
+    
         return;
     }
 
     if (firstValue === null) {
         firstValue = value;
-    } else if (operator) {
+    } else if (operator && !isResult) {
         const result = calculate(firstValue, operator, value);
         
         if (result === CALCULATOR_STATE.ERROR_MESSAGE) {
@@ -107,6 +111,7 @@ function handleOperator(nextOperator) {
 
     waitingForSecondValue = true;
     operator = nextOperator;
+    isResult = false; 
 }
 
 
@@ -116,9 +121,10 @@ function handleEqual() {
     if (operator && firstValue !== null) {
         const result = calculate(firstValue, operator, value);
         currentValue = String(result);
-        firstValue = null;
+        firstValue = result;    
         operator = null;
         waitingForSecondValue = false;
+        isResult = true;
     }
 }
 
@@ -127,4 +133,5 @@ function resetCalculator() {
     firstValue = null;
     operator = null;
     waitingForSecondValue = false;
+    isResult = false;
 }
