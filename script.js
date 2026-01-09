@@ -1,6 +1,9 @@
+"use strict";
 const display = document.getElementById("display-value");
 const buttons = document.querySelectorAll(".btn");
-
+if (!display) {
+    throw new Error("Display element not found");
+}
 const CALCULATOR_STATE = {
     INITIAL_VALUE: "0",
     ERROR_MESSAGE: "Error"
@@ -14,14 +17,15 @@ function updateDisplay() {
     display.textContent = currentValue;
 }
 updateDisplay();
-
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const value = e.target.dataset.value;
-        handleButtonClick(value);
+        const target = e.currentTarget;
+        const value = target.dataset.value;
+        if (value) {
+            handleButtonClick(value);
+        }
     });
 });
-
 document.addEventListener('keydown', (e) => {
     const keyMap = {
         '0': '0', '1': '1', '2': '2', '3': '3', '4': '4',
@@ -30,18 +34,16 @@ document.addEventListener('keydown', (e) => {
         'Enter': '=', '=': '=',
         'Escape': 'C', 'c': 'C', 'C': 'C'
     };
-
     const value = keyMap[e.key];
     if (value) {
         e.preventDefault();
         handleButtonClick(value);
     }
 });
-
 function handleButtonClick(value) {
     if (isNumber(value)) {
         handleNumber(value);
-    } 
+    }
     else if (isOperator(value)) {
         handleOperator(value);
     }
@@ -53,81 +55,68 @@ function handleButtonClick(value) {
     }
     updateDisplay();
 }
-
-
 function isNumber(val) {
     if (isResult) {
         resetCalculator();
     }
-    return !isNaN(val) && val !== null && val !== undefined && val !== '';
+    return val.trim() !== '' && !Number.isNaN(Number(val));
 }
-
 function isOperator(val) {
     return ['+', '-', '*', '/'].includes(val);
 }
-
 function handleNumber(num) {
     if (waitingForSecondValue) {
         currentValue = num;
         waitingForSecondValue = false;
-    } else {
+    }
+    else {
         currentValue = currentValue === '0' ? num : currentValue + num;
     }
 }
-
 function calculate(first, operator, second) {
     switch (operator) {
         case '+': return first + second;
         case '-': return first - second;
         case '*': return first * second;
         case '/': return second !== 0 ? first / second : CALCULATOR_STATE.ERROR_MESSAGE;
-        default:  return second;
+        default: return second;
     }
 }
-
 function handleOperator(nextOperator) {
     const value = parseFloat(currentValue);
-
     if (operator && waitingForSecondValue) {
         operator = nextOperator;
-    
         return;
     }
-
     if (firstValue === null) {
         firstValue = value;
-    } else if (operator && !isResult) {
+    }
+    else if (operator && !isResult) {
         const result = calculate(firstValue, operator, value);
-        
         if (result === CALCULATOR_STATE.ERROR_MESSAGE) {
             currentValue = result;
             resetCalculator();
             return;
         }
-        
         currentValue = String(result);
         firstValue = result;
     }
-
     waitingForSecondValue = true;
     operator = nextOperator;
-    isResult = false; 
+    isResult = false;
 }
-
-
 function handleEqual() {
     const value = parseFloat(currentValue);
-
     if (operator && firstValue !== null) {
         const result = calculate(firstValue, operator, value);
         currentValue = String(result);
-        firstValue = result;    
+        firstValue = typeof result === 'number' ? result : null;
+        ;
         operator = null;
         waitingForSecondValue = false;
         isResult = true;
     }
 }
-
 function resetCalculator() {
     currentValue = '0';
     firstValue = null;
